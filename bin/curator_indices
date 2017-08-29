@@ -1,0 +1,9 @@
+#!/bin/bash 
+
+user="admin"
+password="admin"
+
+#定期删除7天以前的索引
+curator --http_auth ${user}:${password} --host 127.0.0.1 --port 9200 --logfile /dev/null delete indices --time-unit days --timestring %Y.%m.%d --older-than 7 --prefix security-
+
+
