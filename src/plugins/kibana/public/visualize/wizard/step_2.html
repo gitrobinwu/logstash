@@ -1,0 +1,37 @@
+<h1>
+  选择一个搜索源
+  <span class="pull-right label label-default hidden-xs">Step 2</span>
+  <span class="label label-default visible-xs">Step 2</span>
+</h1>
+<ul class="list-group list-group-menu" ng-switch on="stepTwoMode">
+  <li ng-click="stepTwoMode='new'"
+      ng-class="{'active': stepTwoMode=='new'}"
+      class="list-group-item list-group-menu-item">
+    新建一个搜索源
+  </li>
+  <li class="list-group-item" ng-switch-when="new">
+    <!-- Index patterns -->
+    选择一个索引模板
+    <div class="form-group">
+      <select
+              class="form-control"
+              ng-model="indexPattern.selection"
+              ng-options="pattern as pattern for pattern in indexPattern.list | orderBy:'toString()'">
+      </select>
+    </div>
+  </li>
+
+  <li ng-click="stepTwoMode='saved'"
+      ng-class="{'active': stepTwoMode=='saved'}"
+      class="list-group-item list-group-menu-item">
+    加载一个已保存的搜索源
+  </li>
+  <li class="list-group-item" ng-switch-when="saved">
+    <!-- Saved searches -->
+    <saved-object-finder
+            title="Saved Searches"
+            type="searches"
+            make-url="step2WithSearchUrl">
+    </saved-object-finder>
+  </li>
+</ul>
